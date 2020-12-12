@@ -5,3 +5,4 @@ venv
 ChatApp.db
 icon.ico
 kivy.png
+cert.pem

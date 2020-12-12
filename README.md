@@ -15,8 +15,8 @@ Allowing for high security on a language like python!
 - The client uses os.urandom to generate the AES key and Initialisation vector this uses the devices 
   random generator which is considered cryptographically secure in many instances.
 
-### Will there be an Android release?
-- Eventually plan on compiling this client for ever single platform [MacOS](https://en.wikipedia.org/wiki/MacOS), [IOS](https://en.wikipedia.org/wiki/IOS), [Android](https://en.wikipedia.org/wiki/Android), [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows)
+### What platforms will have releases?
+- These ones [MacOS](https://en.wikipedia.org/wiki/MacOS), [IOS](https://en.wikipedia.org/wiki/IOS), [Android](https://en.wikipedia.org/wiki/Android), [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows)
   and [Linux](https://en.wikipedia.org/wiki/Linux)
 
 
