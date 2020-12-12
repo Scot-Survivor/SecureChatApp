@@ -1,0 +1,7 @@
+app
+uploads
+venv
+.idea
+ChatApp.db
+icon.ico
+kivy.png

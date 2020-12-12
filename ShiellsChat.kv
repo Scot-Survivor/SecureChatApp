@@ -1,0 +1,48 @@
+<DarkGreyLabel>:
+ canvas.before:
+  Color:
+   rgb: 80/255, 92/255, 112/255
+  Rectangle:
+   pos: self.pos
+   size: self.size
+
+<WhiteLabel>:
+ canvas.before:
+  Color:
+   rgb: 255, 255, 255
+  Rectangle:
+   pos: self.pos
+   size: self.size
+
+<DarkGreyGridLayout>:
+ canvas.before:
+  Color:
+   rgb: 80/255, 92/255, 112/255
+  Rectangle:
+   pos: self.pos
+   size: self.size
+
+<SlightlyBlackScrollView>:
+ canvas.before:
+  Color:
+   rgb: 20/255, 20/255, 20/255
+  Rectangle:
+   pos: self.pos
+   size: self.size
+
+<SlightlyLessBlackGridLayout>:
+ canvas.before:
+  Color:
+   rgb: 25/255, 25/255, 25/255
+  Rectangle:
+   pos: self.pos
+   size: self.size
+
+<CircularButton>:
+ size: (min(self.width,self.height),min(self.width,self.height)) # force circle
+ canvas:
+  Color:
+   rgba: ((1,1,1,1) if self.state == "normal" else (.5,.5,.5,1))
+  Ellipse:
+   pos: self.pos
+   size: self.size
