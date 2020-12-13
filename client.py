@@ -20,7 +20,7 @@ client_socket.connect((IP, PORT))
 
 client_socket_ssl = context.wrap_socket(client_socket, do_handshake_on_connect=False)
 
-# Do the SSL handshake this is here due to problems with none blocking sockets
+# Do the SSL handshake this is here due to problems with none blocking __active_sockets
 count = 0
 while True:
     try:

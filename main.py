@@ -220,7 +220,7 @@ class ConnectPage(SlightlyLessBlackGridLayout):  # This grabs from Gridlayout fo
     # Connects to the server
     def connect(self, _):
 
-        # Get the information required for the sockets client
+        # Get the information required for the __active_sockets client
         port = int(self.PortIField.text)
         ip = self.IpIField.text
         username = self.UsernameIField.text
@@ -461,7 +461,7 @@ class ShiellsChatApp(App):
         del screen
 
 
-# Error callback function, used by sockets client
+# Error callback function, used by __active_sockets client
 # Updates info page with an error message, shows message and schedules exit in 10 seconds
 # time.sleep() won't work here - will block Kivy and page with error message won't show up
 def show_error(message):

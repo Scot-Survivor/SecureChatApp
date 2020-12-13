@@ -34,8 +34,11 @@ apps like [WhatsApp<sup>TM</sup>](https://en.wikipedia.org/wiki/WhatsApp) that p
   sent to the server.
 
 ### What platforms will have releases?
-- These ones [MacOS](https://en.wikipedia.org/wiki/MacOS), [IOS](https://en.wikipedia.org/wiki/IOS), [Android](https://en.wikipedia.org/wiki/Android), [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows)
-  and [Linux](https://en.wikipedia.org/wiki/Linux)
+- [MacOS](https://en.wikipedia.org/wiki/MacOS)
+- [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows)
+- [Linux](https://en.wikipedia.org/wiki/Linux)
+- [iOS](https://en.wikipedia.org/wiki/IOS)
+- [Android](https://en.wikipedia.org/wiki/Android)
 
 
 ### Inspirations
