@@ -1,6 +1,8 @@
 import socket
 import ssl
 import select
+import json
+import server_login
 
 from threading import Thread, Event
 from server_login import login
@@ -48,7 +50,7 @@ class Client:  # This class is for every client that connects. Stores some impor
 
     def __login(self, user_email, user_password):
         if login(user_password=user_password, username=user_email, c=self.cursor):
-            return True
+            return True  # TODO set up database to return the correct values
         else:
             raise LoginError("Invalid Password or Username")
 
@@ -83,25 +85,47 @@ class Server:
         self.__clients = []
         self.__active_sockets = [self.socket_ssl]
 
-        self.__connection, self.c = None, None  # TODO Setup Database(Planning on remote MySQL) and connect to said database
-        self.AcceptingThread = StoppableThread(target=self.__active_sockets)
+        self.AcceptingThread = StoppableThread(target=self.accept_new_connections)
 
     def accept_new_connections(self):
+        __c, __connection = server_login.connect()  # TODO Change out dev database for a real one
         read_sockets, _, exception_sockets = select.select(self.__active_sockets, [], self.__active_sockets)
         for waiting_socket in read_sockets:
             if waiting_socket == self.socket_ssl:
                 client_socket, client_address = self.socket_ssl.accept()
+                print(client_address)
                 # noinspection PyNoneFunctionAssignment,PyTupleAssignmentBalance
-                email, password = self.__grab_user(client_socket)
+                email, password, token_setting = self.__grab_user(client_socket)
+                print(f"Email: {email}\nPassword: {password}\nToken Setting: {token_setting}")
                 try:
-                    new_client = Client(given_email=email, given_password=password,
+                    new_client = Client(given_email=email, given_password=password.encode('utf-8'),
                                         client_socket=client_socket, client_address=client_address,
-                                        connection=self.__connection, cursor=self.c)
+                                        connection=__connection, cursor=__c)
                 except LoginError:
                     pass  # TODO Kill the connection
                 else:
                     self.__clients.append(new_client)
                     self.__active_sockets.append(client_socket)
 
-    def __grab_user(self, client_socket):
-        pass
+    def __grab_user(self, client_socket) -> str and bool:
+        data = self.__receive_message(client_socket)
+        return data['email'], data['password'], data['token_setting']  # token_setting is a bool of whether the client wants a login token
+
+    def start(self):  # Start method. So start the server
+        self.AcceptingThread.start()
+
+    def __receive_message(self, client_socket: socket.socket) -> dict or bool:
+        data_header = client_socket.recv(self.HEADER_LENGTH)
+        if not len(data_header):  # Error if there is no header
+            return False
+
+        data_length = int(data_header.decode('utf-8').strip())
+        data = client_socket.recv(data_length).decode('utf-8')  # Data is json format
+
+        data = json.loads(data)
+        return data
+
+
+if __name__ == "__main__":
+    DevServer = Server('127.0.0.1', 1234, 10)
+    DevServer.start()
